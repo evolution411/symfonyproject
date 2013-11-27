@@ -1,0 +1,15 @@
+<form action="{{ path('newaddress_page') }}" method ="post" {{ form_enctype(form) }}>
+<div>
+{{ form_label(form.name)}}:  <br>
+{{ form_errors(form.name)}}
+{{ form_widget(form.name)}}
+</div>	
+{{form_label(form.address)}}:  <br>
+{{ form_errors(form.address) }}
+{{ form_widget(form.address) }}
+<br>
+{{ form_label(form.type, 'Type:') }}<br>
+{{ form_errors(form.type) }}
+{{ form_widget(form.type) }}<br>
+     <input type="submit" name='submit'value='Add Address'/>
+</form>

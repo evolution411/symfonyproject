@@ -1,0 +1,15 @@
+acme_hello_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: AcmeHelloBundle:Default:index }
+blog_page:
+ pattern: /blog/{name}
+ defaults: { _controller:AcmeHelloBundle:Default:blog}
+newaddress_page:
+ pattern: /newaddress
+ defaults: { _controller:AcmeHelloBundle:Default:newaddress}
+address_page:
+ pattern: /address
+ defaults: {_controller:AcmeHelloBundle:Default:showall}
+map_page:
+ pattern: /map
+ defaults: {_controller:AcmeHelloBundle:Default:mapadd}
