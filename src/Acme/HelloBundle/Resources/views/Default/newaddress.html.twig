@@ -1,15 +1,39 @@
-<form action="{{ path('newaddress_page') }}" method ="post" {{ form_enctype(form) }}>
-<div>
-{{ form_label(form.name)}}:  <br>
-{{ form_errors(form.name)}}
-{{ form_widget(form.name)}}
-</div>	
-{{form_label(form.address)}}:  <br>
-{{ form_errors(form.address) }}
-{{ form_widget(form.address) }}
-<br>
-{{ form_label(form.type, 'Type:') }}<br>
-{{ form_errors(form.type) }}
-{{ form_widget(form.type) }}<br>
-     <input type="submit" name='submit'value='Add Address'/>
-</form>
+<html>
+<header>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+{%block stylesheets%}
+{% stylesheets '@AcmeHelloBundle/Resources/public/style.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+{%endblock%}
+{%block javascripts%}
+{% javascripts '@AcmeHelloBundle/Resources/public/javascript.js' %}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{%endblock%}
+</header>
+<body>
+    <div class="overlay" id="overlay" style="display:none;"></div>
+    
+<ul id="nav">
+    <li><a href="index.php" >首页</a></li>
+    <li><a href="#login-box" class="login-window">出租</a></li>
+    <li><a href="services.php">公司服务</a></li>
+    <li><a href="about.php">关于公司</a></li>
+    <li><a href="contact.php">联系我们</a></li>
+</ul>
+<div id="login-box" class="login-popup">
+    <a href="" class="close"><img src="http://www.alessioatzeni.com/wp-content/tutorials/jquery/login-box-modal-dialog-window/close_pop.png" class="btn_close" title="Close Window" alt="Close" /></a>
+    <form action="" method="post">
+        <h1>Rental Info/出租资料</h1>
+        <table>
+            <tr><td width="250px">Title/标题:</td> <td><input class="say" name="title" type="text" value="" /></td></tr>
+            <tr><td width="250px">Street/街名:</td> <td><input class="say" name="street" type="text" value="" /></td></tr>
+            <tr><td>Avenue/大道:</td> <td><input class="say" name="avenue" type="text" value="" /></td></tr>
+            <tr><td>Description/租房内容:</td> <td><textarea class="say" name="description"row="5" col="50"></textarea></td></tr>
+            <tr><td>Contact/联系方式:</td> <td><input class="say" name="contact"type='text' value=""></td></tr>
+            <tr><td></td><td><input type="submit" name="submit" class="btnsubmit"  value="Submit The Paper/提交信息"></td></tr>
+    </form>
+</div>
+</body>
+</html>

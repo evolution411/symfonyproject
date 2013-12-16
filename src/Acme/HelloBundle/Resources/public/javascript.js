@@ -1,65 +1,33 @@
+$(document).ready(function() {
+$('a.login-window').click(function() {  
+    //Getting the variable's value from a link 
+    var loginBox = $(this).attr('href');
+ $('body').append('<div id="mask"></div>');
+    $('#mask').fadeIn(300);
+    //Fade in the Popup
+     $(loginBox).fadeIn(300);
+    
+    //Set the center alignment padding + border see css style
+    var popMargTop = ($(loginBox).height() + 20) / 2; 
+    var popMargLeft = ($(loginBox).width() + 20) / 2; 
+    
+    $(loginBox).css({ 
+        'margin-top' : -popMargTop,
+        'margin-left' : -popMargLeft
+    });
+    
+    // Add the mask to body
+   
+    
+    return false;
+});
 
-    var customIcons = {
-      restaurant: {
-        icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png'
-      },
-      bar: {
-        icon: 'http://labs.google.com/ridefinder/images/mm_20_red.png'
-      }
-    };
+// When clicking on the button close or the mask layer the popup closed
+$('a.close, #mask').live('click', function() { 
+  $('#mask , .login-popup').fadeOut(300 , function() {
+    $('#mask').remove(); 
+}); 
+return false;
+});
+});
 
-    function load() {
-      var map = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(40.707333, -74.012390),
-        zoom: 11,
-        mapTypeId: 'roadmap'
-      });
-      var infoWindow = new google.maps.InfoWindow;
-
-      // Change this depending on the name of your PHP file
-      downloadUrl("src\Acme\HelloBundle\Resources\public\js\phpsqlajax_genxml.php", function(data) {
-        var xml = data.responseXML;
-        var markers = xml.documentElement.getElementsByTagName("marker");
-        for (var i = 0; i < markers.length; i++) {
-          var name = markers[i].getAttribute("name");
-          var address = markers[i].getAttribute("address");
-          var type = markers[i].getAttribute("type");
-          var point = new google.maps.LatLng(
-              parseFloat(markers[i].getAttribute("lat")),
-              parseFloat(markers[i].getAttribute("lng")));
-          var html = "<b>" + name + "</b> <br/>" + address;
-          var icon = customIcons[type] || {};
-          var marker = new google.maps.Marker({
-            map: map,
-            position: point,
-            icon: icon.icon
-          });
-          bindInfoWindow(marker, map, infoWindow, html);
-        }
-      });
-    }
-
-    function bindInfoWindow(marker, map, infoWindow, html) {
-      google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.setContent(html);
-        infoWindow.open(map, marker);
-      });
-    }
-
-    function downloadUrl(url, callback) {
-      var request = window.ActiveXObject ?
-          new ActiveXObject('Microsoft.XMLHTTP') :
-          new XMLHttpRequest;
-
-      request.onreadystatechange = function() {
-        if (request.readyState == 4) {
-          request.onreadystatechange = doNothing;
-          callback(request, request.status);
-        }
-      };
-
-      request.open('GET', url, true);
-      request.send(null);
-    }
-
-    function doNothing() {}

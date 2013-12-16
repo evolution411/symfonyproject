@@ -1,18 +1,13 @@
-<!DOCTYPE html >
-  <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <title>PHP/MySQL & Google Maps Example</title>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="src/Acme/HelloBundle/Resources/public/js/javascript.js"></script>
-  </head>
-
-  <body onload="load()">
-    <div id="map" style="width: 800px; height: 500px; border: solid 1px;" ></div>
-	
-	{% for a in address%}
-	{{a}}
-	{% endfor %}
-  </body>
-
-</html>
+{% extends "AcmeHelloBundle:Default:basemap.html.twig"%}
+{%block stylesheets%}
+{% stylesheets '@AcmeHelloBundle/Resources/public/style.css' %}
+<link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+{% endstylesheets %}
+{%endblock stylesheets%}
+{% block container%}
+<div id="map" style="width: 800px; height: 500px; border: solid 1px;" ></div>
+<input type="hidden" id="lat" value="{{address.lat}}" />
+<input type="hidden" id="lng" value="{{address.lng}}" />
+<input type="hidden" id="addressname" value="{{name}}" />
+{{name}}
+{% endblock %}
