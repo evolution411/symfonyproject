@@ -33,7 +33,7 @@
     <parameter key="database_port">null</parameter>
     <parameter key="database_name">map</parameter>
     <parameter key="database_user">root</parameter>
-    <parameter key="database_password"></parameter>
+    <parameter key="database_password">1234567</parameter>
     <parameter key="mailer_transport">smtp</parameter>
     <parameter key="mailer_host">127.0.0.1</parameter>
     <parameter key="mailer_user">null</parameter>
@@ -391,10 +391,10 @@
     <parameter key="assetic.read_from">C:/xampp/htdocs/symfonyproject/app/../web</parameter>
     <parameter key="assetic.write_to">C:/xampp/htdocs/symfonyproject/app/../web</parameter>
     <parameter key="assetic.variables" type="collection"/>
-    <parameter key="assetic.java.bin">/usr/bin/java</parameter>
-    <parameter key="assetic.node.bin">C:\Program Files (x86)\nodejs\\node.EXE</parameter>
-    <parameter key="assetic.ruby.bin">/usr/bin/ruby</parameter>
-    <parameter key="assetic.sass.bin">/usr/bin/sass</parameter>
+    <parameter key="assetic.java.bin">C:\Windows\system32\java.EXE</parameter>
+    <parameter key="assetic.node.bin">/usr/bin/node</parameter>
+    <parameter key="assetic.ruby.bin">C:\RailsInstaller\Ruby1.9.3\bin\ruby.EXE</parameter>
+    <parameter key="assetic.sass.bin">C:\RailsInstaller\Ruby1.9.3\bin\sass.BAT</parameter>
     <parameter key="assetic.filter.cssrewrite.class">Assetic\Filter\CssRewriteFilter</parameter>
     <parameter key="assetic.twig_extension.functions" type="collection"/>
     <parameter key="assetic.controller.class">Symfony\Bundle\AsseticBundle\Controller\AsseticController</parameter>
@@ -485,8 +485,8 @@
     <parameter key="jms_di_extra.disable_grep">false</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/xampp/htdocs/symfonyproject/app/cache/dev/jms_diextra/doctrine/EntityManager_529bc3745c5dc.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager529bc3745c5dc_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">C:/xampp/htdocs/symfonyproject/app/cache/dev/jms_diextra/doctrine/EntityManager_52af6cd7171ab.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager52af6cd7171ab_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="security.secured_services" type="collection"/>
     <parameter key="security.access.method_interceptor.class">JMS\SecurityExtraBundle\Security\Authorization\Interception\MethodSecurityInterceptor</parameter>
     <parameter key="security.access.method_access_control" type="collection"/>
@@ -2239,8 +2239,7 @@
         <argument key="host">127.0.0.1</argument>
         <argument key="port">null</argument>
         <argument key="user">root</argument>
-        <argument key="password"></argument>
-        <argument key="charset">UTF8</argument>
+        <argument key="password">1234567</argument>
         <argument key="driver">pdo_mysql</argument>
         <argument key="driverOptions" type="collection"/>
       </argument>
@@ -2269,6 +2268,14 @@
       <argument type="service">
         <service class="Symfony\Bridge\Doctrine\ContainerAwareEventManager" public="false">
           <argument type="service" id="service_container"/>
+          <call method="addEventSubscriber">
+            <argument type="service">
+              <service class="Doctrine\DBAL\Event\Listeners\MysqlSessionInit" public="false">
+                <tag name="doctrine.event_subscriber" connection="default"/>
+                <argument>UTF8</argument>
+              </service>
+            </argument>
+          </call>
         </service>
       </argument>
       <argument type="collection"/>
@@ -2292,8 +2299,8 @@
     <service id="doctrine.orm.default_manager_configurator" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator">
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager529bc3745c5dc_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>C:/xampp/htdocs/symfonyproject/app/cache/dev/jms_diextra/doctrine/EntityManager_529bc3745c5dc.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager52af6cd7171ab_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>C:/xampp/htdocs/symfonyproject/app/cache/dev/jms_diextra/doctrine/EntityManager_52af6cd7171ab.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>

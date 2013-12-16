@@ -25,31 +25,15 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         $allow = array();
         $pathinfo = rawurldecode($pathinfo);
 
-        if (0 === strpos($pathinfo, '/css')) {
-            if (0 === strpos($pathinfo, '/css/2bdb059')) {
-                // _assetic_2bdb059
-                if ($pathinfo === '/css/2bdb059.css') {
-                    return array (  '_controller' => 'assetic.controller:render',  'name' => '2bdb059',  'pos' => NULL,  '_format' => 'css',  '_route' => '_assetic_2bdb059',);
-                }
-
-                // _assetic_2bdb059_0
-                if ($pathinfo === '/css/2bdb059_style_1.css') {
-                    return array (  '_controller' => 'assetic.controller:render',  'name' => '2bdb059',  'pos' => 0,  '_format' => 'css',  '_route' => '_assetic_2bdb059_0',);
-                }
-
+        if (0 === strpos($pathinfo, '/css/2bdb059')) {
+            // _assetic_2bdb059
+            if ($pathinfo === '/css/2bdb059.css') {
+                return array (  '_controller' => 'assetic.controller:render',  'name' => '2bdb059',  'pos' => NULL,  '_format' => 'css',  '_route' => '_assetic_2bdb059',);
             }
 
-            if (0 === strpos($pathinfo, '/css/7cac197')) {
-                // _assetic_7cac197
-                if ($pathinfo === '/css/7cac197.css') {
-                    return array (  '_controller' => 'assetic.controller:render',  'name' => '7cac197',  'pos' => NULL,  '_format' => 'css',  '_route' => '_assetic_7cac197',);
-                }
-
-                // _assetic_7cac197_0
-                if ($pathinfo === '/css/7cac197_style_1.css') {
-                    return array (  '_controller' => 'assetic.controller:render',  'name' => '7cac197',  'pos' => 0,  '_format' => 'css',  '_route' => '_assetic_7cac197_0',);
-                }
-
+            // _assetic_2bdb059_0
+            if ($pathinfo === '/css/2bdb059_style_1.css') {
+                return array (  '_controller' => 'assetic.controller:render',  'name' => '2bdb059',  'pos' => 0,  '_format' => 'css',  '_route' => '_assetic_2bdb059_0',);
             }
 
         }
@@ -285,6 +269,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         // map_page
         if (0 === strpos($pathinfo, '/map') && preg_match('#^/map/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'map_page')), array (  '_controller' => 'Acme\\HelloBundle\\Controller\\DefaultController::mapaddAction',));
+        }
+
+        // newaddmsg
+        if (0 === strpos($pathinfo, '/newaddmsg') && preg_match('#^/newaddmsg/(?P<street>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'newaddmsg')), array (  '_controller' => 'Acme\\HelloBundle\\Controller\\DefaultController::successAction',));
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

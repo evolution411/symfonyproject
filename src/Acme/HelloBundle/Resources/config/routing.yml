@@ -13,3 +13,6 @@ address_page:
 map_page:
  pattern: /map/{id}
  defaults: {_controller:AcmeHelloBundle:Default:mapadd}
+newaddmsg:
+ pattern: /newaddmsg/{street}
+ defaults: {_controller:AcmeHelloBundle:Default:success}

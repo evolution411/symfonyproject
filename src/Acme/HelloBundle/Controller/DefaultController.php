@@ -1,10 +1,9 @@
 <?php
-
 namespace Acme\HelloBundle\Controller;
-
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Acme\HelloBundle\Entity\Markers;
+use Acme\HelloBundle\Entity\Location;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -19,18 +18,35 @@ class DefaultController extends Controller {
     }
 
     public function newaddressAction(Request $request) {
-        
-        $address = new Markers();
-        $form = $this->createFormBuilder($address)
-                ->add('name', 'text')
-                ->add('address', 'text')
-                ->add('type', 'text')
+        $Location = new location();
+        $em = $this->getDoctrine()->getEntityManager();
+        if($request->getMethod()== "POST"){
+            
+            $Location->setStreet($request->get('street'));  
+            $Location->setDescription($request->get('description'));
+            $Location->setTitle($request->get('title'));
+            $Location->setAvenue($request->get('avenue'));
+            $Location->setContact($request->get('contact'));
+           // $Location->setMakerId('15');
+            $em->persist($Location);
+            $em->flush();
+            return new Response('Sucessfully');
+            //return $this->redirect($this->generateUrl('newaddmsg',array('street'=>$street)));
+            }
+               $form = $this->createFormBuilder($Location)
+                ->add('street', 'text')
+                ->add('avenue', 'text')
+                ->add('description', 'text')
+                ->add('title', 'text')
+                ->add('contact', 'text')
                 ->getForm();
         //$form->handleRequest($request);
         //if($form->isValid()){
-        return $this->render('AcmeHelloBundle:Default:newaddress.html.twig', array('form' => $form->createView(),));
+        return $this->render('AcmeHelloBundle:Default:newaddress.html.twig', array('form' => $form->createView()));
     }
-
+    public function successAction($street){
+        return $this->render('AcmeHelloBundle:Default:newaddmsg.html.twig',array('street'=>$street));
+    }
     public function showallAction() {
         $address = $this->getDoctrine()
                 ->getRepository('Acme\HelloBundle\Entity\Markers')
