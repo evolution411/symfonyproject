@@ -14,5 +14,8 @@ map_page:
  pattern: /map/{id}
  defaults: {_controller:AcmeHelloBundle:Default:mapadd}
 newaddmsg:
- pattern: /newaddmsg/{street}
- defaults: {_controller:AcmeHelloBundle:Default:success}
+ pattern: /newaddmsg/{location_id}
+ defaults: {_controller:AcmeHelloBundle:Default:newaddmsg}
+addmap_page:
+ pattern: /addmap/{id}
+ defaults: {_controller:AcmeHelloBundle:Default:newmap}

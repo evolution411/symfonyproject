@@ -5,103 +5,74 @@ namespace Acme\HelloBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Entity
- *
- * @ORM\Table()
- * @ORM\Entity
+ * Location
  */
-class location
+class Location
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="maker_id", type="integer")
-     */
-    private $makerId;
+    //private $makersId;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=15)
      */
     private $title;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="street", type="string", length=20)
      */
     private $street;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="avenue", type="string", length=20)
      */
     private $avenue;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="description", type="string", length=50)
      */
     private $description;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="contact", type="string", length=15)
      */
     private $contact;
 
+    /**
+     * @var integer
+     */
+    private $id;
+
 
     /**
-     * Get id
+     * Set makersId
      *
-     * @return integer 
-     */
-    public function getId()
+     * @param integer $makersId
+     * @return Location
+     
+    public function setMakersId($makersId)
     {
-        return $this->id;
-    }
-
-    /**
-     * Set makerId
-     *
-     * @param integer $makerId
-     * @return Entity
-     */
-    public function setMakerId($makerId)
-    {
-        $this->makerId = $makerId;
+        $this->makersId = $makersId;
     
         return $this;
-    }
+    }*/
 
     /**
-     * Get makerId
+     * Get makersId
      *
      * @return integer 
-     */
-    public function getMakerId()
+     
+    public function getMakersId()
     {
-        return $this->makerId;
+        return $this->makersId;
     }
-
+*/
     /**
      * Set title
      *
      * @param string $title
-     * @return Entity
+     * @return Location
      */
     public function setTitle($title)
     {
@@ -124,7 +95,7 @@ class location
      * Set street
      *
      * @param string $street
-     * @return Entity
+     * @return Location
      */
     public function setStreet($street)
     {
@@ -147,7 +118,7 @@ class location
      * Set avenue
      *
      * @param string $avenue
-     * @return Entity
+     * @return Location
      */
     public function setAvenue($avenue)
     {
@@ -170,7 +141,7 @@ class location
      * Set description
      *
      * @param string $description
-     * @return Entity
+     * @return Location
      */
     public function setDescription($description)
     {
@@ -193,7 +164,7 @@ class location
      * Set contact
      *
      * @param string $contact
-     * @return Entity
+     * @return Location
      */
     public function setContact($contact)
     {
@@ -210,5 +181,15 @@ class location
     public function getContact()
     {
         return $this->contact;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

@@ -4,6 +4,7 @@
     <id name="id" type="integer" column="id">
       <generator strategy="IDENTITY"/>
     </id>
+    <field name="locationId" type="integer" column="location_id" nullable="false"/>
     <field name="name" type="string" column="name" length="60" nullable="false"/>
     <field name="address" type="string" column="address" length="80" nullable="false"/>
     <field name="lat" type="float" column="lat" nullable="false"/>

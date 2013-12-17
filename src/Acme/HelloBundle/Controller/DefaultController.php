@@ -16,22 +16,51 @@ class DefaultController extends Controller {
     public function blogAction($name) {
         return new Response('<html><body>BLOG ' . $name . '~</body></html>');
     }
-
+    public function newmapAction(Request $request,$id) {
+        $map = new Markers();
+        $em = $this->getDoctrine()->getEntityManager();
+        if($request->getMethod()== "POST"){
+            $housenum = $request->get('housenum');
+            $street = $request->get('street');  
+            $city = $request->get('city');
+            $state = $request->get('state');
+            $zipcode = $request->get('zipcode');
+            $address = $housenum." ". $street." ". $city." ". $state." ". $zipcode;
+            $map->setAddress($address);
+            $latlng = $this->lookup($address);
+            $lat = $latlng['latitude'];
+            $lng = $latlng['longitude'];
+            $map->setLat($lat);
+            $map->setLng($lng);        
+            $map->setLocationId($id);
+            $em->persist($map);
+            $em->flush();
+            return new Response($address);
+            //return $this->redirect($this->generateUrl('newaddmsg',array('street'=>$street)));
+            }
+               $form = $this->createFormBuilder($map)
+                ->add('address', 'text')
+                ->getForm();
+        //$form->handleRequest($request);
+        //if($form->isValid()){
+    return $this->render('AcmeHelloBundle:Default:addmap.html.twig', array('form' => $form->createView()));
+    
+        }
     public function newaddressAction(Request $request) {
         $Location = new location();
         $em = $this->getDoctrine()->getEntityManager();
         if($request->getMethod()== "POST"){
-            
             $Location->setStreet($request->get('street'));  
             $Location->setDescription($request->get('description'));
             $Location->setTitle($request->get('title'));
             $Location->setAvenue($request->get('avenue'));
             $Location->setContact($request->get('contact'));
-           // $Location->setMakerId('15');
+            //$Location->setMakersId('15');
             $em->persist($Location);
             $em->flush();
-            return new Response('Sucessfully');
-            //return $this->redirect($this->generateUrl('newaddmsg',array('street'=>$street)));
+            $location_id = $Location->getId();
+            //return new Response('Form has been Sucessfully added');
+            return $this->redirect($this->generateUrl('newaddmsg',array('location_id'=>$location_id)));
             }
                $form = $this->createFormBuilder($Location)
                 ->add('street', 'text')
@@ -44,9 +73,9 @@ class DefaultController extends Controller {
         //if($form->isValid()){
         return $this->render('AcmeHelloBundle:Default:newaddress.html.twig', array('form' => $form->createView()));
     }
-    public function successAction($street){
-        return $this->render('AcmeHelloBundle:Default:newaddmsg.html.twig',array('street'=>$street));
-    }
+    //public function newaddmsgAction(){
+     //   return $this->render('AcmeHelloBundle:Default:newaddmsg.html.twig',array('location_id'=>$id));
+   // }
     public function showallAction() {
         $address = $this->getDoctrine()
                 ->getRepository('Acme\HelloBundle\Entity\Markers')
