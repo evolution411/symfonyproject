@@ -272,12 +272,12 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         }
 
         // newaddmsg
-        if (0 === strpos($pathinfo, '/newaddmsg') && preg_match('#^/newaddmsg/(?P<location_id>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'newaddmsg')), array (  '_controller' => 'Acme\\HelloBundle\\Controller\\DefaultController::newaddmsgAction',));
+        if ($pathinfo === '/newaddmsg') {
+            return array (  '_controller' => 'Acme\\HelloBundle\\Controller\\DefaultController::newaddmsgAction',  '_route' => 'newaddmsg',);
         }
 
         // addmap_page
-        if (0 === strpos($pathinfo, '/addmap') && preg_match('#^/addmap/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+        if (0 === strpos($pathinfo, '/addmap') && preg_match('#^/addmap/(?P<locationId>[^/]++)$#s', $pathinfo, $matches)) {
             return $this->mergeDefaults(array_replace($matches, array('_route' => 'addmap_page')), array (  '_controller' => 'Acme\\HelloBundle\\Controller\\DefaultController::newmapAction',));
         }
 
