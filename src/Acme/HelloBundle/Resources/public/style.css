@@ -54,11 +54,12 @@ form{
     width: 550px;
 }
 .posters{
+    height:100px;
     width: 180px;
     
 }
-.posters td{
-  
+.posters:hover{
+  outline: 2px solid #DBEAF9; 
 }
 form,.posters {
     color: #777;

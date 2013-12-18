@@ -44,9 +44,9 @@ class DefaultController extends Controller {
                 ->getForm();
         //$form->handleRequest($request);
         //if($form->isValid()){
-    return $this->render('AcmeHelloBundle:Default:addmap.html.twig', array('form' => $form->createView()));
-    
+        return $this->render('AcmeHelloBundle:Default:addmap.html.twig', array('form' => $form->createView()));
         }
+        
     public function newaddressAction(Request $request) {
         $Location = new location();
         $em = $this->getDoctrine()->getEntityManager();
@@ -140,4 +140,3 @@ class DefaultController extends Controller {
     }
 
 }
-
